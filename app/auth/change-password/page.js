@@ -1,5 +1,8 @@
 "use client";
 import React from "react";
+import { useSearchParams } from "next/navigation";
+import { Auth } from "aws-amplify";
+import { useRouter } from "next/navigation";
 
 function ChangePassword() {
   const [pass, setPass] = React.useState({
@@ -7,7 +10,19 @@ function ChangePassword() {
     password: "",
   });
 
-  async function changePassword() {}
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
+
+  async function changePassword() {
+    const email = searchParams.get("email");
+    try {
+      await Auth.forgotPasswordSubmit(email, pass.code, pass.password);
+      router.push("/auth/sign-in");
+    } catch (error) {
+      console.log("error changing password", error);
+    }
+  }
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

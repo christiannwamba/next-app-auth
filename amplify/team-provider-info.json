@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-nextappauth-staging-130735-authRole",
+      "UnauthRoleArn": "arn:aws:iam::056557842269:role/amplify-nextappauth-staging-130735-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::056557842269:role/amplify-nextappauth-staging-130735-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-nextappauth-staging-130735-deployment",
+      "UnauthRoleName": "amplify-nextappauth-staging-130735-unauthRole",
+      "StackName": "amplify-nextappauth-staging-130735",
+      "StackId": "arn:aws:cloudformation:us-east-1:056557842269:stack/amplify-nextappauth-staging-130735/395a4610-2aec-11ee-9841-0abe3c2388af",
+      "AmplifyAppId": "d1dtjmdvqx6lyu"
+    },
+    "categories": {
+      "auth": {
+        "nextappauth": {}
+      }
+    }
+  }
+}

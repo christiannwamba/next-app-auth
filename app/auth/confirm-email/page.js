@@ -1,10 +1,25 @@
 "use client";
 import React from "react";
+import { useSearchParams } from "next/navigation";
+import { Auth } from "aws-amplify";
+import { useRouter } from "next/navigation";
 
 function ConfirmEmail() {
   const [code, setCode] = React.useState("");
 
-  async function confirm() {}
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
+
+  async function confirm() {
+    const email = searchParams.get("email");
+    try {
+      await Auth.confirmSignUp(email, code);
+      router.push("/dashboard");
+    } catch (error) {
+      console.log("error confirming sign up", error);
+    }
+  }
   return (
     <>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">

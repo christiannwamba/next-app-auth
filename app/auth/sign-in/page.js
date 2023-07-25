@@ -1,15 +1,28 @@
 "use client";
 import React from "react";
 
+import { Auth } from "aws-amplify";
+import { useRouter } from "next/navigation";
+
 function SignIn() {
   const [user, setUser] = React.useState({
     email: "",
     password: "",
   });
 
+  const router = useRouter();
+
   async function signIn() {
-    // Handle Sign In
-    // Redirect to dashboard
+    try {
+      const auth = await Auth.signIn({
+        username: user.email,
+        password: user.password,
+      });
+      console.log(auth);
+      router.push(`/dashboard`);
+    } catch (error) {
+      console.log("error signing up:", error);
+    }
   }
 
   return (

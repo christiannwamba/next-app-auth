@@ -1,11 +1,20 @@
 "use client";
 import React from "react";
+import { Auth } from "aws-amplify";
+import { useRouter } from "next/navigation";
 
 function ForgotPassword() {
   const [email, setEmail] = React.useState("");
 
+  const router = useRouter();
+
   async function sendCode() {
-    //
+    try {
+      await Auth.forgotPassword(email);
+      router.push(`/auth/change-password?email=${email}`);
+    } catch (error) {
+      console.log("error sending code", error);
+    }
   }
   return (
     <>

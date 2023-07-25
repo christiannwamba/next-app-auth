@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { Auth } from "aws-amplify";
+import { useRouter } from "next/navigation";
 
 function SignUp() {
   const [user, setUser] = React.useState({
@@ -9,9 +11,25 @@ function SignUp() {
     password: "",
   });
 
+  const router = useRouter();
+
   async function signUp() {
-    // Handle Sign Up
-    // Redirect to Code Confirmation
+    try {
+      const auth = await Auth.signUp({
+        username: user.email,
+        password: user.password,
+        attributes: {
+          name: user.name,
+        },
+        autoSignIn: {
+          enabled: true,
+        },
+      });
+      console.log(auth);
+      router.push(`/auth/confirm-email?email=${user.email}`);
+    } catch (error) {
+      console.log("error signing up:", error);
+    }
   }
 
   return (
